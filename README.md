@@ -43,6 +43,9 @@ When both services are started and running, go to http://localhost:3000 then tak
 ## Contributing
 Feel free to open an issue or make a PR if you think this sample can be improved (it definitely can!).
 
+## Credits
+This example was initially inspired by [this article](https://medium.com/swlh/write-your-first-microservice-in-nest-js-841e10a86117).
+
 ## License
 
 [MIT licensed](LICENSE)
