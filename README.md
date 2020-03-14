@@ -1,8 +1,10 @@
 ## Description
 
-This is an example [Nest](https://github.com/nestjs/nest) monorepo project with two microservices communicating with each other via events over basic [Nest's TCP Transporter](https://docs.nestjs.com/microservices/basics).
+This is an example [Nest](https://github.com/nestjs/nest) monorepo project with two microservices communicating asynchronously with each other via events over basic [Nest's TCP Transporter](https://docs.nestjs.com/microservices/basics).
 
-The first microservice (`api-service`) exposes a `GET /` endpoint which, when requested, sends an event to the second microservice (`worker-service`) through that TCP transporter. `worker-service` then do some fake processing and sends back an event to the first service to notify it that processing is done. All of this is asynchronous, so no matter how much time is needed on the worker side, response is immediate on the API side.
+The first microservice (`api-service`) exposes a `GET /` endpoint which, when requested, sends an event to the second microservice (`worker-service`) through that TCP transporter. `worker-service` then do some fake processing and sends back an event to the first service to notify it that processing is done.
+
+An important thing to note here is that all of this process is asynchronous, so no matter how much time is needed on the worker side, response is immediate on the API side, because we use event-based message style. If we were using [request-response](https://docs.nestjs.com/microservices/basics#request-response) message style, initial request would be blocked until the worker side is done with data processing. The drawback is that there is no guarantee that the messages will be successfully delivered. For that, we would need to add some sort of message broker such as [RabbitMQ](https://docs.nestjs.com/microservices/rabbitmq) as a replacement transporter.
 
 ## Installation
 
